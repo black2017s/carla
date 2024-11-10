@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ar">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carla Vagner</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #d3bfa5;
+        }
+
+        .container {
+            max-width: 400px;
+            text-align: center;
+            background-color: #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .image-container {
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .image-container img {
+            width: 100%;
+            display: block;
+        }
+
+        .name {
+            position: absolute;
+            bottom: 50px;
+            left: 0;
+            right: 0;
+            color: #fff;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            margin-bottom: 18rem;
+            /* border-bottom: 3px solid white calc(60%-20%); */
+
+        }
+
+        .name::after {
+            content: "";
+            display: block;
+            width: 60%;
+            /* يمكنك تعديل العرض حسب الرغبة */
+            height: 2px;
+            background-color: #fff;
+            margin: 8px auto 0;
+        }
+
+        .location {
+            position: absolute;
+            bottom: 35px;
+            left: 0;
+            right: 0;
+            color: #fff;
+            font-size: 18px;
+            text-align: center;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+            margin-bottom: 15rem;
+
+        }
+
+        .time {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            color: #fff;
+            font-size: 16px;
+            text-align: center;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+            margin-bottom: 14rem;
+
+        }
+
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .buttons a {
+            margin: 10px 0;
+            padding: 15px;
+            text-align: center;
+            text-decoration: none;
+            color: #000;
+            background-color: #f1f1f1;
+            border-radius: 10px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .buttons a:hover {
+            background-color: #ccc;
+        }
+
+        /* تأثير الحركة على زر "Exclusive" */
+        .shake {
+            animation: shake 0.5s infinite;
+            display: inline-block;
+        }
+
+        @keyframes shake {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            20%,
+            60% {
+                transform: translateX(-5px);
+            }
+
+            40%,
+            80% {
+                transform: translateX(5px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="image-container">
+            <img src="./photo_5875329491163793150_y.jpg" alt="Carla Vagner Image">
+            <div class="name">Carla Vagner</div>
+            <div id="location" class="location">Current Location</div>
+            <div class="time">🟢 5 minutes ago</div>
+        </div>
+        <div class="buttons">
+            <a href="https://onlyfans.com/hemligt/c12" class="shake">Exclusive</a>
+            <a href="https://www.instagram.com/carlaavagnenn/">Instagram</a>
+            <a href="https://www.tiktok.com/@Carlaavagnen">Tiktok</a>
+        </div>
+    </div>
+    <script>
+        // استخدام Fetch API للحصول على معلومات الموقع من ipgeolocation.io
+        const apiKey = '2359385f1106449aa7ade1b57167b4fb'; // أدخل مفتاح API هنا
+        fetch(`https://api.ipgeolocation.io/ipgeo?apiKey=${apiKey}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                const location = `${data.city}, ${data.state_prov}, ${data.country_name}`; // تجميع المدينة، المحافظة، والدولة
+                document.getElementById('location').textContent = location; // عرض الموقع
+            })
+            .catch(error => {
+                console.error('Error fetching the location:', error);
+                document.getElementById('location').textContent = 'Unable to fetch location'; // رسالة في حالة الخطأ
+            });
+    </script>
+</body>
+
+</html>
